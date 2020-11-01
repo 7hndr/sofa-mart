@@ -1,0 +1,875 @@
+@import "libs"
+@import "vars"
+@import "fonts"
+@import "colors"
+
+*, *::before, *::after
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+
+html
+    font-size: 10px
+
+body
+    background: $white
+    font-family: Helvetica, Arial, sans-serif
+    line-height: 2.4rem
+    color: $main-text
+h1
+    @include heading-1
+h2
+    @include heading-2
+a
+    cursor: pointer
+    text-decoration: none
+    color: $main-text
+    @include smth
+    @include text
+    &:hover
+        color: $pink
+ul
+    list-style: none
+.times
+    padding: 0.5rem
+.sidebar
+    background: $white
+    height: 80rem
+    max-height: 100%
+    width: 28rem
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 100
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.06)
+    @media screen and (max-width: 900px)
+        left: -28rem
+        height: auto
+    @media screen and (max-width: 600px)
+        width: 100%
+        left: -100%
+.logo
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    width: 24rem
+    height: 7.2rem
+    margin: 0 2rem
+    @media screen and (max-width: 900px)
+        width: auto
+        height: 2.8rem
+        margin: 0 1rem
+.logo__symbol
+    width: 2.8rem
+    height: 2.8rem
+    svg
+        width: 2.8rem
+        height: 2.8rem
+.logo__name
+    width: 8.5rem
+    height: 2.8rem
+    font-size: 3rem
+    margin-left: 1rem
+    @media screen and (max-width: 400px)
+        margin-left: .5rem
+        font-size: 2rem
+.menu
+    padding: .8rem 0
+    z-index: 200
+    &-item
+        display: flex
+        align-items: center
+        height: 4rem
+        padding: .6rem 0
+        cursor: pointer
+        position: relative
+        margin: .5rem 0
+        z-index: 300
+        @include text
+        @include smth
+        @media screen and (max-width: 600px)
+            background: $grey-fills
+            border-radius: .8rem
+            width: 90%
+            margin: .5rem auto
+
+        &_terms
+            margin-top: 1rem
+            &::before
+                content: ''
+                position: absolute
+                width: 248px
+                height: 1px
+                background-color: $grey-lines
+                top: -0.4rem
+                right: 0
+                left: 0
+                margin: 0 auto
+                @media screen and (max-width: 600px)
+                    width: 100%
+        &_has-drop
+            &::after
+                @media screen and (min-width: 600px)
+                    content: ''
+                    position: absolute
+                    right: 3rem
+                    top: .8rem
+                    width: 24px
+                    height: 24px
+                    background: url("../img/sprite/svg/sprite.css-b3d17b4f.svg") no-repeat
+                    background-position: 65.45454545454545% 78.94736842105263%
+        &:hover
+            background-color: $light-pink
+        &:hover .menu-item__dropdown
+            @media screen and (min-width: 600px)
+                visibility: visible
+                display: flex
+                width: 280px
+                padding: 4rem 1.6rem
+                opacity: 1
+                @media screen and (max-width: 600px)
+                    width: 100vw
+        span
+            margin-left: 0.6rem
+        &__icon
+            display: flex
+            align-items: center
+            margin-left: 1.6rem
+            svg
+                width: 2.8rem
+                height: 2.8rem
+                fill: $main-text
+        &__dropdown
+            height: 80rem
+            opacity: 0
+            width: 0
+            overflow: hidden
+            flex-direction: column
+            align-items: start
+            position: fixed
+            background-color: $white
+            box-shadow: inset 30px 0px 20px -30px rgba(0, 0, 0, 0.06)
+            left: 280px
+            top: 0
+            z-index: 50
+            @include smth
+            &-item
+                display: flex
+                align-items: center
+                height: 4rem
+                margin: .2rem 0
+                @include text
+                @include smth
+                &:hover
+                    color: $pink
+            &-head
+                margin-bottom: 2rem
+
+.showMoreMenuItems
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 1.4rem
+    padding: 1.2rem
+    background: none
+    color: $grey-text
+    width: 90%
+    border-radius: .8rem
+    border: 1px solid $grey-lines
+    align-self: center
+    margin: 0 auto
+    outline: none
+    cursor: pointer
+    @include smth
+    &:hover, &:active
+        background: $pink
+        color: $white
+
+.menu-active
+    left: 0
+    @media screen and (max-width: 900px)
+        top: 5.6rem
+        padding: 2rem 0
+.menu-toggler
+    border: 0
+    background: transparent
+    padding: 1rem
+    outline: none
+    cursor: pointer
+    display: none
+    @media screen and (max-width: 900px)
+        display: flex
+    svg
+        width: 24px
+        height: 24px
+        @include smth
+    &:hover svg
+        fill: $pink
+.hide
+    width: 0 !important
+    height: 0 !important
+    overflow: hidden
+.header
+    background: $grey-fills
+    height: 7.2rem
+    padding: 1.2rem 4rem
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-right: 0
+    grid-gap: 2.4rem
+    z-index: 90
+    @media screen and (max-width: 1000px)
+        padding: 1.2rem 1.2rem 1.2rem 4rem
+    @media screen and (max-width: 1000px)
+        grid-gap: 1rem
+        padding: 1.2rem
+    @media screen and (max-width: 900px)
+        display: none
+
+.header__mobile
+    display: none
+    justify-content: space-between
+    align-items: center
+    height: 5.6rem
+    z-index: 90
+    width: 100%
+    margin-right: 0
+    padding: 0 1.2rem
+    background: $grey-fills
+    @media screen and (max-width: 900px)
+        display: flex
+
+.locations
+    display: flex
+    align-items: center
+    justify-content: space-between
+    .city-picker
+        @media screen and (max-width: 500px)
+            display: none
+
+.communication
+    display: grid
+    grid-gap: 2.4rem
+    grid-template-columns: 1fr 1fr
+    align-items: center
+    justify-content: end
+.city-picker
+    &__select
+        background-color: transparent
+        border: none
+        display: inline-block
+        padding: 0.5rem
+        outline: none
+        cursor: pointer
+        @include smth
+        @include text
+        @media screen and (max-width: 500px)
+            background-color: $white
+        &:hover, &:active
+            color: $pink
+
+.stores-link
+    display: inline-flex
+    align-items: center
+    justify-self: flex-start
+    padding: 0 2.2rem
+    &__icon
+        display: flex
+        align-items: center
+        cursor: pointer
+        @include smth
+        svg
+            fill: $main-text
+            width: 2.4rem
+            height: 2.4rem
+            @include smth
+    &:hover .stores-link__icon svg
+        fill: $pink
+    &:hover .stores-link__text
+        color: $pink
+    &__text
+        @include smth
+        @include text
+        @media screen and (max-width: 900px)
+            display: none
+
+.phone
+    justify-self: end
+    flex: none
+    max-width: 120px
+    @include text
+    span
+        @media screen and (max-width: 600px)
+            display: none
+    &__icon
+        display: none
+        fill: $main-text
+        width: 24px
+        height: 24px
+        @include smth
+        @media screen and (max-width: 900px)
+            display: flex
+        &:hover
+            fill: $pink
+.callback-btn
+    justify-self: end
+    width: 15rem
+    border: 1px solid $main-text
+    border-radius: .8rem
+    padding: 1.2rem 1.6rem
+    cursor: pointer
+    outline: none
+    @include smth
+    @include text
+    @media screen and (max-width: 900px)
+        padding: .6rem .8rem
+    @media screen and (max-width: 500px)
+        display: none
+    &:hover
+        color: $pink
+        border: 1px solid $pink
+    &:active
+        background-color: $pink
+        color: $white
+.search-bar
+    height: 7.2rem
+    padding: 1.6rem 4rem
+    display: flex
+    justify-content: space-between
+    align-items: center
+    @media screen and (max-width: 900px)
+        padding: 0
+        height: 9rem
+        display: flex
+        flex-direction: column
+    .city-picker
+        padding: 1rem
+        align-self: flex-start
+        display: none
+        @media screen and (max-width: 900px)
+            display: flex
+.search-form
+    width: 100%
+    max-width: 67.8rem
+    display: inline-flex
+    position: relative
+    font-style: normal
+    font-weight: normal
+    @include text
+    @media screen and (max-width: 900px)
+        width: 90%
+    &__input
+        color: $main-text
+        border: 1px solid $grey-lines
+        border-radius: .8rem
+        width: 100%
+        height: 4rem
+        padding: .8rem 1.6rem
+        padding-right: 4rem
+        outline: none
+        @include smth
+        &::-webkit-input-placeholder
+            color: $grey-text
+        &::-moz-placeholder
+            color: $grey-text
+        &:hover, &:active, &:focus
+            border: 1px solid $pink
+    &__button
+        position: absolute
+        top: 0
+        right: 0px
+        width: 4rem
+        height: 4rem
+        border: none
+        background: $pink
+        border-radius: 0 .8rem .8rem 0
+        outline: none
+        cursor: pointer
+        @include smth
+        &::before
+            content: ''
+            width: 4rem
+            height: 4rem
+        svg
+            width: 2.4rem
+            height: 2.4rem
+            fill: $white
+            @include smth
+        &:hover svg
+            fill: $pink
+        &:hover
+            background: transparent
+
+.session-info
+    display: flex
+    justify-content: space-between
+    padding: 2rem
+    padding-right: 0
+    @media screen and (max-width: 900px)
+        display: none
+.account
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    margin-right: 4rem
+    @media screen and (max-width: 900px)
+        margin: 0
+        height: 2.4rem
+    &__icon
+        display: flex
+        justify-content: center
+        align-items: center
+        svg
+            fill: $main-text
+            width: 2.4rem
+            height: 2.4rem
+    &__text
+        @include text
+        @include smth
+        @media screen and (max-width: 900px)
+            display: none
+    &:hover .account__text
+        color: $pink
+.mini-cart
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    @include smth
+    @media screen and (max-width: 900px)
+        height: 2.9rem
+    &__icon
+        display: flex
+        justify-content: center
+        align-items: center
+        position: relative
+        &_qty
+            position: absolute
+            color: $white
+            font-size: 0.9rem
+            right: 0
+            top: 0
+            line-height: 16px
+            width: 16px
+            height: 16px
+            display: flex
+            justify-content: center
+            align-items: center
+            text-align: center
+        svg
+            width: 28px
+            height: 29px
+            .st0
+                fill: $main-text
+                @include smth
+            .st1
+                fill: $pink
+    &__totals
+        padding: 0.8rem
+        flex: none
+        @include text-bold
+        @include smth
+        @media screen and (max-width: 900px)
+            display: none
+    &:hover + .mini-cart__totals, .mini-cart__totals:hover
+        color: $pink
+    &:hover .mini-cart__icon svg .st0
+        fill: $pink
+
+.page
+    min-height: 100vh
+    padding-right: 0
+    padding-left: 0
+    @media (min-width: 900px)
+        padding-left: 28rem
+.offer
+    padding: 4rem
+    &__title
+        display: flex
+        align-items: center
+        svg
+            height: 24px
+            width: 24px
+            fill: $pink
+            @media screen and (max-width: 500px)
+                display: none
+
+        h2
+            margin-left: 1rem
+.control-arrows
+    display: flex
+    justify-content: flex-end
+    button
+        display: flex
+        justify-content: center
+        align-items: center
+        background: transparent
+        border: 1px solid $grey-lines
+        border-radius: 50%
+        width: 3.2rem
+        height: 3.2rem
+        cursor: pointer
+        outline: none
+        @include smth
+        svg
+            fill: $main-text
+            width: 3.2rem
+            height: 3.2rem
+            @include smth
+        &:hover svg
+            fill: $pink
+        &:hover
+            border: 1px solid $pink
+    &_left
+        transform: scale(-1)
+        margin-right: 1.6rem
+.offer__content
+    display: flex
+    // justify-content: space-between
+    align-items: center
+    // flex-wrap: wrap
+    padding: 1.2rem 0
+    height: 354px
+.product-card
+    height: 330px
+    width: 225px
+    max-width: 250px
+    border: 1px solid $grey-lines
+    border-radius: .8rem
+    outline: none
+    background: $white
+    margin: 0 .5rem
+    display: flex
+    flex-direction: column
+    cursor: pointer
+    box-shadow: 0 0 0rgba(0, 0, 0, 0.00)
+    position: relative
+    z-index: 200
+    @include smth
+    &_best-price
+        padding: 1rem .8rem
+        height: 32px
+        background: $pink
+        border-radius: 8px 8px 8px 0px
+        position: absolute
+        top: -1px
+        right: -1px
+        display: flex
+        justify-content: center
+        align-items: center
+        span
+            color: $white
+            font-weight: bold
+            font-size: 1rem
+            letter-spacing: .12rem
+        svg
+            fill: $white
+            height: 14px
+            width: 14px
+            margin-right: 0.5rem
+    &_present
+        padding: 1rem .8rem
+        height: 32px
+        background: $green
+        border-radius: 8px 8px 8px 0px
+        position: absolute
+        top: -1px
+        right: -1px
+        display: flex
+        justify-content: center
+        align-items: center
+        span
+            color: $white
+            font-weight: bold
+            font-size: 1rem
+            letter-spacing: .12rem
+        svg
+            fill: $white
+            height: 14px
+            width: 14px
+            margin-right: 0.5rem
+    &__img
+        height: 168px
+        width: 100%
+        object-fit: cover
+        border-radius: .8rem .8rem 0 0
+    &__title
+        height: 4.8rem
+        margin: .8rem
+        @include text
+    &__options
+        visibility: hidden
+        opacity: 0
+        height: 0
+        padding: 0.8rem
+        padding-top: 0
+        @include smth
+        &-item
+            h6
+                font-weight: normal
+                color: $grey-text
+                @include caption
+            span
+                @include caption
+    &__info
+        display: grid
+        width: 100%
+        padding: 0.8rem
+        justify-content: space-between
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr 1fr 1fr
+        grid-template-areas: "old-prc btn" "prc btn" "avlbl avlbl"
+        &_old-price
+            grid-area: old-prc
+            color: $grey-text
+            @include caption
+        &_price
+            grid-area: prc
+            font-size: 2.2rem
+            line-height: 2.4rem
+            font-weight: bold
+            color: $main-text
+        &_btn
+            grid-area: btn
+            width: 8.5rem
+            height: 4rem
+            justify-self: end
+            cursor: pointer
+            outline: none
+        &_available
+            grid-area: avlbl
+            display: flex
+            align-items: center
+            margin-top: 1rem
+            svg
+                width: 16px
+                height: 16px
+            span
+                padding: 0 0.5rem
+                @include caption
+    &:hover .product-card__options
+        visibility: visible
+        opacity: 1
+        max-height: 100%
+    &:hover
+        height: 463px
+        border: 1px solid $pink
+        box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1)
+
+.buy__btn
+    transition: all 0.5s ease
+    width: 8.5rem
+    height: 4rem
+    text-transform: uppercase
+    font-weight: bold
+    color: $pink
+    border: 1px solid $pink
+    background: none
+    border-radius: 0.8rem
+    cursor: pointer
+    @include caption
+    @include smth
+    &:hover
+        background: $pink
+        color: $white
+
+.qty__btn
+    width: 2.4rem
+    height: 2.4rem
+    border: 0px
+    background: none
+    color: $main-text
+    cursor: pointer
+    outline: none
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 1.8rem
+    font-weight: bold
+    border-radius: .4rem
+    @include smth
+    &:hover
+        background: $light-pink
+
+.qty__counter
+    outline: none
+    width: 3rem
+    height: 3rem
+    color: $pink
+    border: none
+    text-align: center
+    font-weight: bold
+    font-size: 1.5rem
+    padding: 0
+
+.qty
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 8.5rem
+    height: 4rem
+    border: 1px solid $pink
+    border-radius: 0.8rem
+
+.visible__qty
+    opacity: 0
+    transition: all .25s ease
+    display: none
+    visibility: hidden
+    height: 0
+    width: 0
+    padding: 0
+    border: none
+input[type='number']
+    -moz-appearance: textfield
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+        -webkit-appearance: none
+
+.footer
+    margin-top: 3rem
+    border-top: 1px solid $grey-lines
+    padding: 2rem 1rem
+    .info
+        display: flex
+        align-items: flex-start
+        flex-wrap: wrap
+        padding: 2rem 2rem 0 2rem
+        @media screen and (max-width: 546px)
+            padding: 0
+        &__list
+            &_item
+                a
+                    color: $grey-text
+                    &:hover
+                        color: $pink
+        &__roll
+            width: 220px
+            padding: 2rem 0
+            height: auto
+            max-height: 22rem
+            line-height: 3.4rem
+            @media screen and (max-width: 546px)
+                width: 100%
+                padding: 1rem 0
+                cursor: pointer
+            &_title
+                color: $main-text
+                position: relative
+                @include text
+                @media screen and (max-width: 546px)
+                    border-bottom: 1px solid $grey-lines
+                &::after
+                    content: ''
+                    @media screen and (max-width: 546px)
+                        position: absolute
+                        right: 0
+                        width: 24px
+                        height: 24px
+                        background: url("../img/sprite/svg/sprite.css-b3d17b4f.svg") no-repeat
+                        background-position: 65.45454545454545% 78.94736842105263%
+                        transform: rotate(90deg)
+                &:hover
+                    @media screen and (max-width: 546px)
+                        color: $pink
+            &_title
+                line-height: 3.4rem
+            &_item
+                padding: .4rem 0
+                a
+                    color: $grey-text
+                    @include text
+                    &:hover
+                        color: $pink
+        &__socials
+            &_items
+                display: flex
+                justify-content: flex-start
+                align-items: center
+                a
+                    &:hover
+                        transform: translateY(-0.2rem)
+                    img
+                        width: 24px
+                        margin-right: .8rem
+        &__payment
+            &_items
+                display: flex
+                justify-content: flex-start
+                align-items: center
+                @media screen and (max-width: 546px)
+                    flex-wrap: wrap
+                img
+                    height: 17px
+                    margin-right: 1rem
+                    &:last-child
+                        margin-right: 0
+                    &:nth-child(2)
+                        height: 14px
+.stars
+    position: relative
+    display: flex
+    align-items: center
+    svg
+        height: 1.5rem
+        width: 1.5rem
+        fill: $gold
+        margin-right: 0.5rem
+    svg:nth-child(5)
+        fill: $grey
+
+    svg:nth-child(6)
+        fill: $gold
+        position: absolute
+        left: 8rem
+        top: 0
+        height: 1.5rem
+        width: 0.75rem
+.cover__list
+    @media screen and (max-width: 546px)
+        max-height: 0px
+        overflow: hidden
+        @include smth
+.uncover
+    @media screen and (max-width: 546px)
+        height: auto
+        max-height: 22rem
+        padding-top: 1rem
+.reviews__list_item
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    padding: 0.5rem 0
+    line-height: 2.4rem
+    &:first-child
+        margin-bottom: 0.5rem
+    img
+        width: 80px
+        object-fit: scale-down
+        object-position: 0 center
+        height: 22
+        margin-right: 1rem
+.privacy
+    padding: 2rem 2rem 0 2rem
+    @media screen and (max-width: 600px)
+        text-align: center
+    a
+        @include caption
+.copyrights
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 1.6rem 2rem 0 2rem
+    @include caption
+    @media screen and (max-width: 600px)
+        flex-direction: column
+.by
+    display: flex
+    @media screen and (max-width: 600px)
+        padding: 2rem
+    svg
+        width: 16px
+        height: 16px
+        margin-right: 0.5rem
